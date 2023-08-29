@@ -4,6 +4,8 @@ import "./PetRegister.css";
 import { FaDog, FaCat } from "react-icons/fa6";
 
 const PetRegister = () => {
+  const [petType, setPetType] = useState("");
+
   const [petInfo, setPetInfo] = useState({
     name: "",
     species: "",
@@ -12,10 +14,11 @@ const PetRegister = () => {
     password: "",
   });
 
-  const [petType, setPetType] = useState("dog");
+  const [successPage, setSuccessPage] = useState(false);
 
   const handleTypeChange = (newType) => {
     setPetType(newType);
+    setPetInfo((prevInfo) => ({ ...prevInfo, species: newType }));
   };
 
   const handleInputChange = (event) => {
@@ -26,33 +29,42 @@ const PetRegister = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // if (
-    //   petInfo.name === "" ||
-    //   petInfo.species === "" ||
-    //   petInfo.birthDate === "" ||
-    //   petInfo.username === "" ||
-    //   petInfo.password === ""
-    // ) {
-    //   console.error("Please fill out all fields.");
-    //   return;
-    // }
+    // see if there is any empty inputs
+    const emptyFields = [];
+    for (const fieldName in petInfo) {
+      if (petInfo[fieldName] === "") {
+        emptyFields.push(fieldName);
+      }
+    }
 
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/pets/create",
-        petInfo
-      );
-      console.log(response.data.message);
-      // Limpar os campos do formulário após o envio bem-sucedido
-      setPetInfo({
-        name: "",
-        species: "",
-        birthDate: "",
-        username: "",
-        password: "",
+    if (emptyFields.length > 0) {
+      const inputs = document.querySelectorAll(".createUserForm input");
+      console.log(emptyFields);
+      inputs.forEach((input) => {
+        if (emptyFields.includes(input.name)) {
+          input.classList.add("emptyInput");
+        } else {
+          input.classList.remove("emptyInput");
+        }
       });
-    } catch (error) {
-      console.error("Error trying to register animal:", error);
+      return;
+    } else if (emptyFields.length === 0) {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/pets/create",
+          petInfo
+        );
+        setSuccessPage(true);
+        setPetInfo({
+          name: "",
+          species: "",
+          birthDate: "",
+          username: "",
+          password: "",
+        });
+      } catch (error) {
+        console.error("Error trying to register animal:", error);
+      }
     }
   };
 
@@ -117,6 +129,11 @@ const PetRegister = () => {
         <br />
         <button type="submit">Register Buddy</button>
       </form>
+
+      <div className={`successModal ${successPage ? "show" : ""}`}>
+        <h2>Your buddy was successfully registered!</h2>
+        <button type="button" onClick={() => setSuccessPage(false)}>Go Back</button>
+      </div>
     </div>
   );
 };
