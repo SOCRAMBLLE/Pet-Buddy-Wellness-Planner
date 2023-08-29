@@ -1,0 +1,82 @@
+/* color palette
+#FFC6AC
+#FFF6DC
+#C4C1A4 #8d8b77 #575649
+#9E9FA5 
+*/
+
+.createUserForm {
+    border-radius: 2rem;
+    box-shadow: #8d8b77 0px 0px 6px 2px;
+    margin: 5rem auto;
+    padding: 1rem 0.5rem;
+    max-width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+form label {
+    margin: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+form label span {
+    width: 6rem;
+    text-align: end;
+}
+
+
+form label input {
+    width: 14rem;
+    height: 30px;
+    float: center;
+    text-align: center;
+}
+
+button {
+    padding: 0.4rem 0.6rem;
+    min-width: 5rem;
+    border-radius: 10px;
+    border: 1px solid;
+    background-color: #C4C1A4;
+    letter-spacing: 1.5px;
+    font-size: 15px;
+    transition: all .3s ease;
+    box-shadow: #8d8b77 0px 6px 0px 0px;
+    color: #FFF6DC;
+    margin: 1rem 0.2rem;
+   }
+      
+   button.active {
+    background-color: #8d8b77;
+    /*50, 168, 80*/
+    box-shadow: #C4C1A4 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms;
+    border-color: #575649;
+   }
+
+   button.active svg {
+    font-size: 1.8rem;
+    transition: 200ms ease;
+   }
+
+   button:active {
+    background-color: #8d8b77;
+    /*50, 168, 80*/
+    box-shadow: #C4C1A4 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms ease;
+    border-color: #575649;
+   }
+
+   button.speciesBtn {
+    font-size: 2rem;
+    padding: 0.1rem 3rem 0.4rem;
+   }
