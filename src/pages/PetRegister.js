@@ -15,6 +15,7 @@ const PetRegister = () => {
   });
 
   const [successPage, setSuccessPage] = useState(false);
+  const [speciesEmpty, setSpeciesEmpty] = useState(false);
 
   const handleTypeChange = (newType) => {
     setPetType(newType);
@@ -37,6 +38,9 @@ const PetRegister = () => {
       }
     }
 
+    if (emptyFields.includes("species")) {
+      setSpeciesEmpty(true)
+    }
     if (emptyFields.length > 0) {
       const inputs = document.querySelectorAll(".createUserForm input");
       console.log(emptyFields);
@@ -50,10 +54,7 @@ const PetRegister = () => {
       return;
     } else if (emptyFields.length === 0) {
       try {
-        const response = await axios.post(
-          "http://localhost:5000/api/pets/create",
-          petInfo
-        );
+        await axios.post("http://localhost:5000/api/pets/create", petInfo);
         setSuccessPage(true);
         setPetInfo({
           name: "",
@@ -132,7 +133,16 @@ const PetRegister = () => {
 
       <div className={`successModal ${successPage ? "show" : ""}`}>
         <h2>Your buddy was successfully registered!</h2>
-        <button type="button" onClick={() => setSuccessPage(false)}>Go Back</button>
+        <button type="button" onClick={() => setSuccessPage(false)}>
+          Go Back
+        </button>
+      </div>
+
+      <div className={`speciesErrorDiv ${speciesEmpty ? "show" : ""}`}>
+        <h2>You have to choose Dog or Cat first. Press OK to continue.</h2>
+        <button type="button" onClick={() => setSpeciesEmpty(false)}>
+          OK
+        </button>
       </div>
     </div>
   );

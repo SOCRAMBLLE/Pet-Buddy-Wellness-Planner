@@ -98,3 +98,19 @@ button.speciesBtn {
   align-items: center;
   justify-content: center;
 }
+
+.speciesErrorDiv {
+  position: absolute;
+  background-color: #fff6dc;
+  padding: 2rem 1rem;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.speciesErrorDiv.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
