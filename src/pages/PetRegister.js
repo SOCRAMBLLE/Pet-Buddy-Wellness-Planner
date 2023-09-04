@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Card from "../components/Card";
 import "./PetRegister.css";
 import { FaDog, FaCat } from "react-icons/fa6";
+import ButtonLink from "../components/ButtonLink";
 
 const PetRegister = () => {
   const [petType, setPetType] = useState("");
@@ -70,7 +72,7 @@ const PetRegister = () => {
   };
 
   return (
-    <div className="createUserForm">
+    <Card className="createUserForm">
       <h1>Register Your Buddy</h1>
       <form onSubmit={handleSubmit}>
         <button
@@ -131,20 +133,18 @@ const PetRegister = () => {
         <button type="submit">Register Buddy</button>
       </form>
 
-      <div className={`successModal ${successPage ? "show" : ""}`}>
+      <Card className={`successModal ${successPage ? "show" : ""}`}>
         <h2>Your buddy was successfully registered!</h2>
-        <button type="button" onClick={() => setSuccessPage(false)}>
-          Go Back
-        </button>
-      </div>
+        <ButtonLink to="/dashboard">Continue to Dashboard</ButtonLink>
+      </Card>
 
-      <div className={`speciesErrorDiv ${speciesEmpty ? "show" : ""}`}>
+      <Card className={`speciesErrorDiv ${speciesEmpty ? "show" : ""}`}>
         <h2>You have to choose Dog or Cat first. Press OK to continue.</h2>
         <button type="button" onClick={() => setSpeciesEmpty(false)}>
           OK
         </button>
-      </div>
-    </div>
+      </Card>
+    </Card>
   );
 };
 

@@ -1,0 +1,15 @@
+.homepageCard {
+    margin-top: 5rem;
+    gap: 4rem;    
+}
+
+.homepageCard h1 {
+    margin-top: 2rem;
+}
+
+.homepageCard div {
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 90%;
+    box-shadow: #8d8b77 0px 0px 6px 2px;
+}

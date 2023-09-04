@@ -6,22 +6,13 @@
 */
 
 .createUserForm {
-  border-radius: 2rem;
-  box-shadow: #8d8b77 0px 0px 6px 2px;
-  margin: 3rem auto;
-  padding: 1rem 0.5rem;
-  max-width: 95%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: 5rem !important;
 }
 
 form label {
-  margin: 0.2rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
 }
 
@@ -77,6 +68,7 @@ button:active {
 button.speciesBtn {
   font-size: 2rem;
   padding: 0.1rem 3rem 0.4rem;
+  margin: 2rem 0.3rem;
 }
 
 .emptyInput {
@@ -85,32 +77,40 @@ button.speciesBtn {
 
 .successModal {
   position: absolute;
-  background-color: #fff6dc;
-  padding: 2rem 1rem;
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-
-.successModal.show {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fff6dc;
+  padding: 2rem 1rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -2;
+  transition: all 0.4s ease-in;
+}
+
+.successModal.show {
+  opacity: 1;
+  z-index: 0;
 }
 
 .speciesErrorDiv {
   position: absolute;
-  background-color: #fff6dc;
-  padding: 2rem 1rem;
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-
-.speciesErrorDiv.show {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fff6dc;
+  padding: 2rem 1rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -2;
+  transition: all 0.4s ease-in;
+}
+
+.speciesErrorDiv.show {
+  opacity: 1;
+  z-index: 0;
 }
