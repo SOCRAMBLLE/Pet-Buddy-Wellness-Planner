@@ -9,3 +9,10 @@
   align-items: center;
   justify-content: center;
 }
+
+
+@media (min-width: 700px) {
+  .card {
+    max-width: 650px;
+  }
+}

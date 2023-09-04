@@ -1,6 +1,7 @@
 .homepageCard {
     margin-top: 5rem;
-    gap: 4rem;    
+    gap: 4rem;   
+    padding-bottom: 4rem; 
 }
 
 .homepageCard h1 {

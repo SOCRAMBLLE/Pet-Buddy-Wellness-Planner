@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import "./PetRegister.css";
 import { FaDog, FaCat } from "react-icons/fa6";
 import ButtonLink from "../components/ButtonLink";
+import Cert from "../components/Cert";
 
 const PetRegister = () => {
   const [petType, setPetType] = useState("");
@@ -72,6 +73,7 @@ const PetRegister = () => {
   };
 
   return (
+    <>
     <Card className="createUserForm">
       <h1>Register Your Buddy</h1>
       <form onSubmit={handleSubmit}>
@@ -131,6 +133,8 @@ const PetRegister = () => {
         </label>
         <br />
         <button type="submit">Register Buddy</button>
+        <br />
+        <ButtonLink to="/">Go Back</ButtonLink>
       </form>
 
       <Card className={`successModal ${successPage ? "show" : ""}`}>
@@ -145,6 +149,8 @@ const PetRegister = () => {
         </button>
       </Card>
     </Card>
+    <Cert />
+    </>
   );
 };
 

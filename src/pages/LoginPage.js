@@ -3,12 +3,14 @@ import axios from "axios";
 import Card from "../components/Card";
 import "./LoginPage.css";
 import ButtonLink from "../components/ButtonLink";
+import Cert from "../components/Cert";
 
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [wrongData, setWrongData] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +28,7 @@ const LoginPage = () => {
         setLoggedIn(true);
         console.log("Login successful")
       } else {
+        setWrongData(true);
         console.log("Invalid username or password");
       }
     } catch (error) {
@@ -34,6 +37,7 @@ const LoginPage = () => {
   };
 
   return (
+    <>
     <Card className="loginForm">
       <h1>Good to see you again!</h1>
       <h4>Login to enter</h4>
@@ -59,12 +63,21 @@ const LoginPage = () => {
         </label>
         <br />
         <button type="submit">Login</button>
+        <br />
+        <ButtonLink to="/">Go Back</ButtonLink>
       </form>
       <Card className={`loginSuccessDiv ${loggedIn ? "show" : ""}`}>
         <h2>Login successful</h2>
         <ButtonLink to="/dashboard">Continue to Dashboard</ButtonLink>
       </Card>
+      <Card className={`wrongUserPass ${wrongData ? "show" : ""}`}>
+        <h2>Wrong Username or Password</h2>
+        <button onClick={() => setWrongData(false)}>Go Back</button>
+      </Card>
     </Card>
+    <Cert />
+    </>
+    
   );
 };
 

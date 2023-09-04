@@ -1,0 +1,43 @@
+/* color palette
+#FFC6AC
+#FFF6DC
+#C4C1A4 #8d8b77 #575649
+#9E9FA5 
+*/
+
+.certContainer {
+    margin: 1rem 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.certContainer .MFLogo {
+    width: 150px;
+    margin-bottom: 1rem;
+}
+
+.certContainer .MFLogo img {
+    width: 100%;
+}
+
+.certContainer .gitHubL {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #575649;
+    font-size: 2rem;
+    margin: 0 2rem 1rem 0;
+    transition: all 0.2s ease-in;
+}
+
+.certContainer .gitHubL:hover {
+    color: #C4C1A4;
+    transform: scale(1.2);
+    filter: drop-shadow(0px 0px 2px rgba(87, 86, 73, 1));
+}
