@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Fur Buddy Wellness Planner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Fur Buddy Wellness Planner is a web application designed to help pet owners manage their pets' health and well-being. It is built using React and Node.js and utilizes AWS DynamoDB for database management.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### User Authentication
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Register**: New users can create accounts by providing their pet's information along with a username and password.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Login**: Registered users can securely log in to access the application's features.
 
-### `npm test`
+### Pet Management
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Add Pets**: Users can register their pets by providing details such as name, species, birth date, and more.
 
-### `npm run build`
+- **View Pet Information**: After adding pets, users can view and manage their pet's information on the dashboard.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Dashboard
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Personalized Dashboard**: Each user has a personalized dashboard that displays their registered pets and relevant information.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Upcoming Features
 
-### `npm run eject`
+- **Health Tracking**: Track your pet's health and vaccinations.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Reminders**: Set reminders for appointments, medication, and more.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Frontend**: React.js
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Backend**: Node.js
 
-## Learn More
+- **Database**: AWS DynamoDB
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run this project locally, follow these steps:
 
-### Code Splitting
+1. Clone the repository:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```
+   git clone https://github.com/SOCRAMBLLE/Pet-Buddy-Wellness-Planner.git
+   ```
 
-### Analyzing the Bundle Size
+2. Install dependencies for the frontend:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   ```
+   npm install
+   ```
 
-### Making a Progressive Web App
+3. Start the frontend development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   ```
+   npm start
+   ```
 
-### Advanced Configuration
+4. In a separate terminal, navigate to the backend folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```
+   cd backend
+   ```
 
-### Deployment
+5. Start the backend server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   ```
+   node server.js
+   ```
 
-### `npm run build` fails to minify
+Now, you should have both the frontend and backend running locally.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributing
+
+Contributions are welcome!
