@@ -1,5 +1,7 @@
 # Fur Buddy Wellness Planner
 
+<p align="center"><img src="./BuddyPlanner.png"></img></p>
+
 ## Overview
 
 Fur Buddy Wellness Planner is a web application designed to help pet owners manage their pets' health and well-being. It is built using React and Node.js and utilizes AWS DynamoDB for database management.
