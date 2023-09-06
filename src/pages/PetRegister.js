@@ -3,7 +3,7 @@ import axios from "axios";
 import Card from "../components/Card";
 import "./PetRegister.css";
 import { FaDog, FaCat } from "react-icons/fa6";
-import ButtonLink from "../components/ButtonLink";
+import ButtonLink from "../components/UI/ButtonLink";
 import Cert from "../components/Cert";
 
 const PetRegister = () => {
@@ -133,8 +133,6 @@ const PetRegister = () => {
         </label>
         <br />
         <button type="submit">Register Buddy</button>
-        <br />
-        <ButtonLink to="/">Go Back</ButtonLink>
       </form>
 
       <Card className={`successModal ${successPage ? "show" : ""}`}>

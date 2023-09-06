@@ -1,6 +1,6 @@
 import Card from "../components/Card";
 import "./HomePage.css";
-import ButtonLink from "../components/ButtonLink";
+import ButtonLink from "../components/UI/ButtonLink";
 import Cert from "../components/Cert";
 
 const HomePage = () => {
