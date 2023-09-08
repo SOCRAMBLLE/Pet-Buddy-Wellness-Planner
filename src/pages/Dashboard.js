@@ -1,5 +1,6 @@
 import Card from "../components/Card"
 import Cert from "../components/Cert";
+import TodoList from "../components/ToDoList";
 
 
 
@@ -10,7 +11,7 @@ const Dashboard = () => {
     return(
         <>
         <Card>
-            <h1>DASHBOARD!</h1>
+            <TodoList />
         </Card>
         <Cert />
         </>

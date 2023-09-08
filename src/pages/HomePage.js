@@ -13,7 +13,7 @@ const HomePage = () => {
           <ButtonLink to="/register">Register</ButtonLink>
         </div>
         <div>
-          <h4>You already have an account?</h4>
+          <h4>Already have an account?</h4>
           <ButtonLink to="/login">Login</ButtonLink>
         </div>
       </Card>

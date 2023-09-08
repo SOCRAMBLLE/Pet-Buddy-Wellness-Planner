@@ -28,42 +28,7 @@ form label input {
   text-align: center;
 }
 
-button {
-  padding: 0.4rem 0.6rem;
-  min-width: 5rem;
-  border-radius: 10px;
-  border: 1px solid;
-  background-color: #c4c1a4;
-  letter-spacing: 1.5px;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  box-shadow: #8d8b77 0px 6px 0px 0px;
-  color: #fff6dc;
-  margin: 1rem 0.2rem;
-}
 
-button.active {
-  background-color: #8d8b77;
-  /*50, 168, 80*/
-  box-shadow: #c4c1a4 0px 0px 0px 0px;
-  transform: translateY(5px);
-  transition: 200ms;
-  border-color: #575649;
-}
-
-button.active svg {
-  font-size: 1.8rem;
-  transition: 200ms ease;
-}
-
-button:active {
-  background-color: #8d8b77;
-  /*50, 168, 80*/
-  box-shadow: #c4c1a4 0px 0px 0px 0px;
-  transform: translateY(5px);
-  transition: 200ms ease;
-  border-color: #575649;
-}
 
 button.speciesBtn {
   font-size: 2rem;

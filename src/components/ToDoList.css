@@ -1,0 +1,138 @@
+/* color palette
+#FFC6AC
+#FFF6DC
+#C4C1A4 #8d8b77 #575649
+#9E9FA5 
+*/
+
+.toDoListContainer {
+  width: 80%;
+  position: relative;
+}
+
+.addTaskContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.addTaskContainer input {
+	margin-left: 1.3rem;
+	width: 100%;
+}
+
+.addTaskContainer button {
+  margin-left: 1rem;
+  padding: 2px;
+  transform: translateY(-4px);
+}
+
+.listContainer {
+  margin-top: 1rem;
+}
+
+.listContainer button {
+  margin: 0.3rem 0.2rem 0.3rem 1rem;
+  padding: 1px;
+  transform: translateY(-4px);
+  font-size: 1.1rem;
+}
+
+.listContainer ul {
+  padding-left: 0;
+}
+
+.listContainer ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listContainer .taskContainer {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.listContainer .taskContainer span {
+  width: 100%;
+  background-color: #fff6dc;
+  border-radius: 10px;
+  padding: 2px 0;
+	margin-left: 0.7rem;
+}
+
+
+.checkBoxCointainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transform: translateY(-4px);
+}
+
+
+.check {
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+
+.check:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34, 50, 84, 0.03);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.check svg {
+  position: relative;
+  z-index: 1;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: black;
+  stroke-width: 1;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+}
+
+.check svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+
+.check svg polyline {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 66;
+}
+
+.cbx {
+	display: none;
+}
+
+.cbx:checked + .check svg {
+  stroke: var(--accent-color, black);
+}
+
+.cbx:checked + .check svg path {
+  stroke-dashoffset: 60;
+  transition: all 0.3s linear;
+}
+
+.cbx:checked + .check svg polyline {
+  stroke-dashoffset: 42;
+  transition: all 0.2s linear;
+  transition-delay: 0.15s;
+}
