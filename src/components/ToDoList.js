@@ -1,10 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPenToSquare, FaFloppyDisk, FaTrashCan } from "react-icons/fa6";
+import axios from "axios";
 import "./ToDoList.css";
 
-const TodoList = () => {
+const TodoList = ({ petID }) => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/pets/list?petID=${petID}`);
+        const toDoListData = response.data.toDoList;
+  
+        if (Array.isArray(toDoListData)) {
+          const formattedTasks = toDoListData.map(item => {
+            if (item && item.S) {
+              return {
+                text: item.S,
+                completed: false,
+                showMenu: false,
+                editText: item.S,
+              };
+            }
+            return null;
+          });
+  
+          const filteredTasks = formattedTasks.filter(task => task !== null);
+  
+          setTasks(filteredTasks);
+        } else {
+          setTasks([]);
+        }
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+    fetchTasks();
+  }, [petID]);
+  
 
   const addTask = () => {
     if (newTask.trim() !== "") {
@@ -65,7 +99,8 @@ const TodoList = () => {
       </form>
       <div className="listContainer">
         <ul>
-          {tasks.map((task, index) => (
+        
+        {tasks && tasks.length > 0 ? (tasks.map((task, index) => (
             <li key={index}>
               <div className="taskContainer">
                 <div className="checkBoxCointainer">
@@ -75,7 +110,7 @@ const TodoList = () => {
                     className="cbx"
                     onClick={() => toggleTask(index)}
                   />
-                  <label htmlFor={`cbx${index}`} class="check">
+                  <label htmlFor={`cbx${index}`} className="check">
                     <svg width="18px" height="18px" viewBox="0 0 18 18">
                       <path d="M 1 9 L 1 9 c 0 -5 3 -8 8 -8 L 9 1 C 14 1 17 5 17 9 L 17 9 c 0 4 -4 8 -8 8 L 9 17 C 5 17 1 14 1 9 L 1 9 Z"></path>
                       <polyline points="1 9 7 14 15 4"></polyline>
@@ -117,7 +152,10 @@ const TodoList = () => {
                 )}
               </div>
             </li>
-          ))}
+        ))
+          ) : (
+            <p>Nenhuma tarefa encontrada.</p>
+          )}
         </ul>
       </div>
     </div>

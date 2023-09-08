@@ -49,11 +49,9 @@ exports.createPet = (req, res) => {
         },
       };
 
-      const listID = uuid.v4();
       const paramsNewList = {
         TableName: "PetBuddyToDoLists",
         Item: {
-          ListID: { S: listID },
           PetID: { S: petId },
           ToDoList: { L: [{ S: "Pet " + name }] },
         },
@@ -68,7 +66,6 @@ exports.createPet = (req, res) => {
           });
         } else {
           console.log("Animal registered successfully:", data);
-          res.status(201).json({ message: "Animal registered successfully." });
         }
       });
       dynamoDB.putItem(paramsNewList, (err, data) => {
@@ -80,7 +77,7 @@ exports.createPet = (req, res) => {
           });
         } else {
           console.log("List created successfully:", data);
-          res.status(201).json({ message: "List created successfully." });
+          res.status(201).json({ message: "Animal registered successfully." });
         }
       });
     }
