@@ -4,6 +4,9 @@ const modifyPetModule = require('./modifyPet');
 const checkUserModule = require('./checkUser');
 const getListModule = require('./getList');
 const getPetIDModule = require('./getPetID');
+const createTaskModule = require('./createTask');
+const modifyTaskModule = require('./modifyTask');
+const deleteTaskModule = require('./deleteTask');
 
 exports.createPet = createPetModule.createPet;
 exports.deletePet = deletePetModule.deletePet;
@@ -11,3 +14,6 @@ exports.modifyPet = modifyPetModule.modifyPet;
 exports.checkUser = checkUserModule.checkUser;
 exports.getList = getListModule.getList;
 exports.getPetID = getPetIDModule.getPetID
+exports.createTask = createTaskModule.createTask;
+exports.modifyTask = modifyTaskModule.modifyTask;
+exports.deleteTask = deleteTaskModule.deleteTask;
