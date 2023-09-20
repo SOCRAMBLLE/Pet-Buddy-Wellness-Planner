@@ -15,20 +15,19 @@ const TodoList = ({ petID }) => {
   
         if (Array.isArray(toDoListData)) {
           const formattedTasks = toDoListData.map(item => {
-            if (item && item.S) {
-              return {
-                text: item.S,
-                completed: false,
-                showMenu: false,
-                editText: item.S,
-              };
-            }
-            return null;
+            const taskDescription = item.L[0].S;
+            const taskStatus= item.L[1].BOOL;
+
+            return {
+              text: taskDescription,
+              completed: taskStatus,
+              showMenu: false,
+              editText: taskDescription,
+
+            };
           });
   
-          const filteredTasks = formattedTasks.filter(task => task !== null);
-  
-          setTasks(filteredTasks);
+          setTasks(formattedTasks);
         } else {
           setTasks([]);
         }

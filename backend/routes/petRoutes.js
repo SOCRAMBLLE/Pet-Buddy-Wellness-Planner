@@ -8,6 +8,8 @@ router.post('/create', petController.createPet);
 router.post('/check', petController.checkUser); 
 router.get('/list', petController.getList);
 router.get('/getPetID', petController.getPetID);
-
+router.post('/addTask', petController.createTask);
+router.put('/modifyTask', petController.modifyTask);
+router.delete('/deleteTask', petController.deleteTask);
 
 module.exports = router;
