@@ -15,8 +15,8 @@ const TodoList = ({ petID }) => {
   
         if (Array.isArray(toDoListData)) {
           const formattedTasks = toDoListData.map(item => {
-            const taskDescription = item.L[0].S;
-            const taskStatus= item.L[1].BOOL;
+            const taskDescription = item.M.Description.S;
+            const taskStatus= item.M.Completed.BOOL;
 
             return {
               text: taskDescription,
@@ -39,15 +39,15 @@ const TodoList = ({ petID }) => {
   }, [petID]);
   
 
-  const addTask = () => {
-    if (newTask.trim() !== "") {
-      setTasks([
-        ...tasks,
-        { text: newTask, completed: false, showMenu: false, editText: newTask },
-      ]);
-      setNewTask("");
-    }
-  };
+  // const addTask = () => {
+  //   if (newTask.trim() !== "") {
+  //     setTasks([
+  //       ...tasks,
+  //       { text: newTask, completed: false, showMenu: false, editText: newTask },
+  //     ]);
+  //     setNewTask("");
+  //   }
+  // };
 
   const toggleTask = (index) => {
     const updatedTasks = [...tasks];
@@ -79,9 +79,47 @@ const TodoList = ({ petID }) => {
     setTasks(updatedTasks);
   };
 
-  const handleSubmit = (event) => {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   addTask();
+  // };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    addTask();
+
+    if (newTask.trim() === "") {
+      return;
+    }
+
+    try {
+      // Try to make POST
+      const response = await axios.post(
+        "http://localhost:5000/api/pets/addTask",
+        {
+          petID: petID,
+          newTask: newTask,
+        }
+      );
+
+      // Verify if success
+      if (response.status === 201) {
+        // Update table on DB
+        setTasks((prevTasks) => [
+          ...prevTasks,
+          {
+            text: newTask,
+            completed: false,
+            showMenu: false,
+            editText: newTask,
+          },
+        ]);
+
+        // Clean field
+        setNewTask("");
+      }
+    } catch (error) {
+      console.error("Error creating task:", error);
+    }
   };
 
   return (
@@ -153,7 +191,7 @@ const TodoList = ({ petID }) => {
             </li>
         ))
           ) : (
-            <p>Nenhuma tarefa encontrada.</p>
+            <p>No tasks were found.</p>
           )}
         </ul>
       </div>

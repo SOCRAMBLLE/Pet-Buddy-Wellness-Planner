@@ -53,7 +53,16 @@ exports.createPet = (req, res) => {
         TableName: "PetBuddyToDoLists",
         Item: {
           PetID: { S: petId },
-          ToDoList: { L: [ { L: [ { S: "Pet " + name }, { BOOL: false } ] } ] },
+          ToDoList: {
+            L: [
+              {
+                M: {
+                  Description: { S: "Task 1" },
+                  Completed: { BOOL: false },
+                },
+              },
+            ],
+          },
         },
       };
 
