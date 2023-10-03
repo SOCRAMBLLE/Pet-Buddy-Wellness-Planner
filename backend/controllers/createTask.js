@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const config = require('../config/aws-config');
+const uuid = require('uuid');
 
 AWS.config.update({
   accessKeyId: config.accessKeyId,
@@ -11,6 +12,8 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 exports.createTask = (req, res) => {
   const { petID, newTask } = req.body;
+
+  const newTaskID = uuid.v4();
 
   // Check actual list items
   const paramsGet = {
@@ -30,17 +33,14 @@ exports.createTask = (req, res) => {
       return;
     }
 
-    // Update list items
-    // const currentTasks = data.Item.ToDoList.L || [];
-    // const updatedTasks = currentTasks.push( { L: [{S: newTask}, {BOOL: false}] } );
-
-    // const newTasks = [{S: newTask , BOOL: false}]
+    // update list items on DB
     const newTasks = [{
+        "TaskID": newTaskID ,
         "Description": newTask ,
         "Completed": false ,
+
     }];
 
-    // update list items on DB
     const paramsUpdate = {
       TableName: 'PetBuddyToDoLists',
       Key: {

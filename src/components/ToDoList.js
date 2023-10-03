@@ -10,23 +10,26 @@ const TodoList = ({ petID }) => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/pets/list?petID=${petID}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/pets/list?petID=${petID}`
+        );
         const toDoListData = response.data.toDoList;
-  
+
         if (Array.isArray(toDoListData)) {
-          const formattedTasks = toDoListData.map(item => {
+          const formattedTasks = toDoListData.map((item) => {
             const taskDescription = item.M.Description.S;
-            const taskStatus= item.M.Completed.BOOL;
+            const taskStatus = item.M.Completed.BOOL;
+            const taskID = item.M.TaskID.S;
 
             return {
               text: taskDescription,
               completed: taskStatus,
               showMenu: false,
               editText: taskDescription,
-
+              taskID: taskID,
             };
           });
-  
+
           setTasks(formattedTasks);
         } else {
           setTasks([]);
@@ -37,7 +40,6 @@ const TodoList = ({ petID }) => {
     };
     fetchTasks();
   }, [petID]);
-  
 
   // const addTask = () => {
   //   if (newTask.trim() !== "") {
@@ -55,9 +57,31 @@ const TodoList = ({ petID }) => {
     setTasks(updatedTasks);
   };
 
-  const deleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+  // const deleteTask = (index) => {
+  //   const updatedTasks = tasks.filter((_, i) => i !== index);
+  //   setTasks(updatedTasks);
+  // };
+
+  const deleteTask = async (index, event) => {
+    try {
+      if (!tasks[index]) {
+        console.error("Task not found in state.");
+        return;
+      } else {
+        await axios.delete("http://localhost:5000/api/pets/deleteTask", {
+          data: {
+            petID: petID,
+            taskID: tasks[index].taskID,
+          },
+        });
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+      }
+    } catch (error) {
+      console.error("Error deleting task:", error);
+      console.log("petID: " + petID + ", taskID: " + tasks[index].taskID);
+    }
   };
 
   const toggleMenu = (index) => {
@@ -86,11 +110,11 @@ const TodoList = ({ petID }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (newTask.trim() === "") {
       return;
     }
-
+  
     try {
       // Try to make POST
       const response = await axios.post(
@@ -100,27 +124,45 @@ const TodoList = ({ petID }) => {
           newTask: newTask,
         }
       );
-
+  
       // Verify if success
       if (response.status === 201) {
-        // Update table on DB
-        setTasks((prevTasks) => [
-          ...prevTasks,
-          {
-            text: newTask,
-            completed: false,
-            showMenu: false,
-            editText: newTask,
-          },
-        ]);
-
+  
         // Clean field
         setNewTask("");
+  
+        // new fetch for updated tasks
+        const updatedTasksResponse = await axios.get(
+          `http://localhost:5000/api/pets/list?petID=${petID}`
+        );
+  
+        // update the updated tasks state
+        const toDoListData = updatedTasksResponse.data.toDoList;
+        if (Array.isArray(toDoListData)) {
+          const formattedTasks = toDoListData.map((item) => {
+            const taskDescription = item.M.Description.S;
+            const taskStatus = item.M.Completed.BOOL;
+            const taskID = item.M.TaskID.S;
+  
+            return {
+              text: taskDescription,
+              completed: taskStatus,
+              showMenu: false,
+              editText: taskDescription,
+              taskID: taskID,
+            };
+          });
+  
+          setTasks(formattedTasks);
+        } else {
+          setTasks([]);
+        }
       }
     } catch (error) {
       console.error("Error creating task:", error);
     }
   };
+  
 
   return (
     <div className="toDoListContainer">
@@ -136,60 +178,60 @@ const TodoList = ({ petID }) => {
       </form>
       <div className="listContainer">
         <ul>
-        
-        {tasks && tasks.length > 0 ? (tasks.map((task, index) => (
-            <li key={index}>
-              <div className="taskContainer">
-                <div className="checkBoxCointainer">
-                  <input
-                    type="checkbox"
-                    id={`cbx${index}`}
-                    className="cbx"
-                    onClick={() => toggleTask(index)}
-                  />
-                  <label htmlFor={`cbx${index}`} className="check">
-                    <svg width="18px" height="18px" viewBox="0 0 18 18">
-                      <path d="M 1 9 L 1 9 c 0 -5 3 -8 8 -8 L 9 1 C 14 1 17 5 17 9 L 17 9 c 0 4 -4 8 -8 8 L 9 17 C 5 17 1 14 1 9 L 1 9 Z"></path>
-                      <polyline points="1 9 7 14 15 4"></polyline>
-                    </svg>
-                  </label>
-                </div>
-                <span
-                  style={{
-                    textDecoration: task.completed ? "line-through" : "none",
-                  }}
-                >
-                  {task.showMenu ? (
+          {tasks && tasks.length > 0 ? (
+            tasks.map((task, index) => (
+              <li key={index}>
+                <div className="taskContainer">
+                  <div className="checkBoxCointainer">
                     <input
-                      type="text"
-                      className="edit-input"
-                      value={task.editText}
-                      onChange={(e) =>
-                        handleEditTextChange(index, e.target.value)
-                      }
+                      type="checkbox"
+                      id={`cbx${index}`}
+                      className="cbx"
+                      onClick={() => toggleTask(index)}
                     />
-                  ) : (
-                    task.text
-                  )}
-                </span>
-              </div>
-              <div className="dropdownEditTask">
-                <button onClick={() => toggleMenu(index)}>
-                  <FaPenToSquare />
-                </button>
-                {task.showMenu && (
-                  <div className="dropdown-content">
-                    <button onClick={() => saveTask(index)}>
-                      <FaFloppyDisk />
-                    </button>
-                    <button onClick={() => deleteTask(index)}>
-                      <FaTrashCan />
-                    </button>
+                    <label htmlFor={`cbx${index}`} className="check">
+                      <svg width="18px" height="18px" viewBox="0 0 18 18">
+                        <path d="M 1 9 L 1 9 c 0 -5 3 -8 8 -8 L 9 1 C 14 1 17 5 17 9 L 17 9 c 0 4 -4 8 -8 8 L 9 17 C 5 17 1 14 1 9 L 1 9 Z"></path>
+                        <polyline points="1 9 7 14 15 4"></polyline>
+                      </svg>
+                    </label>
                   </div>
-                )}
-              </div>
-            </li>
-        ))
+                  <span
+                    style={{
+                      textDecoration: task.completed ? "line-through" : "none",
+                    }}
+                  >
+                    {task.showMenu ? (
+                      <input
+                        type="text"
+                        className="edit-input"
+                        value={task.editText}
+                        onChange={(e) =>
+                          handleEditTextChange(index, e.target.value)
+                        }
+                      />
+                    ) : (
+                      task.text
+                    )}
+                  </span>
+                </div>
+                <div className="dropdownEditTask">
+                  <button onClick={() => toggleMenu(index)}>
+                    <FaPenToSquare />
+                  </button>
+                  {task.showMenu && (
+                    <div className="dropdown-content">
+                      <button onClick={() => saveTask(index)}>
+                        <FaFloppyDisk />
+                      </button>
+                      <button onClick={() => deleteTask(index)}>
+                        <FaTrashCan />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))
           ) : (
             <p>No tasks were found.</p>
           )}

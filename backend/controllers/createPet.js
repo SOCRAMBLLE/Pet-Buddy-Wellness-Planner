@@ -36,6 +36,7 @@ exports.createPet = (req, res) => {
       return;
     } else {
       const petId = uuid.v4();
+      const taskId = uuid.v4();
 
       const paramsNewUser = {
         TableName: "PetBuddyDataBase",
@@ -57,6 +58,7 @@ exports.createPet = (req, res) => {
             L: [
               {
                 M: {
+                  TaskID: { S: taskId },
                   Description: { S: "Task 1" },
                   Completed: { BOOL: false },
                 },
