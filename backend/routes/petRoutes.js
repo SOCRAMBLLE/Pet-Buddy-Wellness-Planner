@@ -9,7 +9,9 @@ router.post('/check', petController.checkUser);
 router.get('/list', petController.getList);
 router.get('/getPetID', petController.getPetID);
 router.post('/addTask', petController.createTask);
-router.put('/modifyTask', petController.modifyTask);
+router.put('/modifyTask', petController.modifyTaskDescription);
 router.delete('/deleteTask', petController.deleteTask);
+router.put('/modifyTaskStatus', petController.modifyTaskStatus);
+
 
 module.exports = router;

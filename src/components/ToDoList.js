@@ -51,11 +51,29 @@ const TodoList = ({ petID }) => {
   //   }
   // };
 
-  const toggleTask = (index) => {
+  // const toggleTask = (index) => {
+  //   const updatedTasks = [...tasks];
+  //   updatedTasks[index].completed = !updatedTasks[index].completed;
+  //   setTasks(updatedTasks);
+  // };
+
+  const toggleTask = async (index) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].completed = !updatedTasks[index].completed;
     setTasks(updatedTasks);
+  
+    try {
+      const updatedTask = updatedTasks[index];
+      await axios.put("http://localhost:5000/api/pets/modifyTaskStatus", {
+        petID: petID,
+        taskID: updatedTask.taskID,
+        newStatus: updatedTask.completed,
+      });
+    } catch (error) {
+      console.error("Error updating task status:", error);
+    }
   };
+  
 
   // const deleteTask = (index) => {
   //   const updatedTasks = tasks.filter((_, i) => i !== index);
@@ -90,13 +108,32 @@ const TodoList = ({ petID }) => {
     setTasks(updatedTasks);
   };
 
-  const saveTask = (index) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index].text = updatedTasks[index].editText;
-    updatedTasks[index].showMenu = false;
-    setTasks(updatedTasks);
-  };
+  // const saveTask = (index) => {
+  //   const updatedTasks = [...tasks];
+  //   updatedTasks[index].text = updatedTasks[index].editText;
+  //   updatedTasks[index].showMenu = false;
+  //   setTasks(updatedTasks);
+  // };
 
+  const saveTask = async (index) => {
+    try {
+      const updatedTask = tasks[index];
+      await axios.put("http://localhost:5000/api/pets/modifyTask", {
+        petID: petID,
+        taskID: updatedTask.taskID,
+        newDescription: updatedTask.editText,
+      });
+  
+      // Atualize a tarefa localmente se a atualização for bem-sucedida
+      const updatedTasks = [...tasks];
+      updatedTasks[index].text = updatedTask.editText;
+      updatedTasks[index].showMenu = false;
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Error updating task description:", error);
+    }
+  };
+ 
   const handleEditTextChange = (index, newText) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].editText = newText;
@@ -166,7 +203,7 @@ const TodoList = ({ petID }) => {
 
   return (
     <div className="toDoListContainer">
-      <h2>To-Do List</h2>
+      <h2>Tasks</h2>
       <form className="addTaskContainer" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -187,6 +224,7 @@ const TodoList = ({ petID }) => {
                       type="checkbox"
                       id={`cbx${index}`}
                       className="cbx"
+                      checked={task.completed}
                       onClick={() => toggleTask(index)}
                     />
                     <label htmlFor={`cbx${index}`} className="check">

@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Dashboard = () => {
   const { user } = useContext(LoginContext);
-  const [petID, setPetID] = useState(""); // Estado para armazenar o PetID
+  const [petID, setPetID] = useState(""); // state to store PetID
 
   useEffect(() => {
     const fetchPetID = async () => {
@@ -16,7 +16,6 @@ const Dashboard = () => {
           `http://localhost:5000/api/pets/getPetID?username=${user.username}`
         );
         setPetID(response.data.petID);
-        console.log(response.data.petID);
       } catch (error) {
         console.error("Erro ao buscar o PetID:", error);
       }
