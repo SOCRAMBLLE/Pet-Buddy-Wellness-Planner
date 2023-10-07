@@ -86,7 +86,7 @@ const TodoList = ({ petID }) => {
         console.error("Task not found in state.");
         return;
       } else {
-        await axios.delete("http://localhost:5000/api/pets/deleteTask", {
+        await axios.delete("http://localhost/:5000/api/pets/deleteTask", {
           data: {
             petID: petID,
             taskID: tasks[index].taskID,

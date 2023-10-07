@@ -93,7 +93,7 @@ const PetRegister = () => {
         </button>
         <br />
         <label>
-          <span>Name:</span>
+          <span>Buddy's Name:</span>
           <input
             type="text"
             name="name"

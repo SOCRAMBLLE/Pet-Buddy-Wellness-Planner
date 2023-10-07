@@ -6,7 +6,6 @@
 */
 
 .toDoListContainer {
-  width: 80%;
   position: relative;
 }
 
@@ -30,6 +29,7 @@
 
 .listContainer {
   margin-top: 1rem;
+  width: 100%;
 }
 
 .listContainer button {
@@ -64,6 +64,9 @@
 	margin-left: 0.7rem;
 }
 
+.listContainer .taskContainer span input {
+  width: 100%;
+}
 
 .checkBoxCointainer {
 	display: flex;

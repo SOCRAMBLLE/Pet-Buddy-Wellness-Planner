@@ -59,7 +59,7 @@ exports.createPet = (req, res) => {
               {
                 M: {
                   TaskID: { S: taskId },
-                  Description: { S: "Task 1" },
+                  Description: { S: "Pet your buddy " + name },
                   Completed: { BOOL: false },
                 },
               },
