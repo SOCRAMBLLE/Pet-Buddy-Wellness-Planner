@@ -4,7 +4,11 @@ import { useContext } from "react";
 import "./NavigationBar.css";
 
 const NavigationBar = () => {
-  const { user } = useContext(LoginContext);
+  const { user, logout } = useContext(LoginContext);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <Navbar expand="lg" className="bg-bodz-tertiarz">
@@ -16,7 +20,7 @@ const NavigationBar = () => {
             {user.auth ? (
               <>
                 <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-                <Nav.Link href="/">Logout</Nav.Link>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
             ) : (
               <>

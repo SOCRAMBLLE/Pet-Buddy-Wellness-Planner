@@ -20,13 +20,16 @@ const LoginProvider = ({ children }) => {
     
 
     const logout = () => {
-        setUser((user) => ({
-            username: '',
-            auth: false,
-        }));
-
+        // Clean state
+        setUser({ username: '', auth: false });
+    
+        // Remove login info of localStorage
         localStorage.removeItem('loggedInUser');
+    
+        // Redirects use to login page
+        window.location.href = '/login'; 
     };
+    
 
     return (
         <LoginContext.Provider value = {{ user, login, logout }}>
