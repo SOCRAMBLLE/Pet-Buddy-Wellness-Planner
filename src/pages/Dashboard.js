@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import Cert from "../components/Cert";
 import TodoList from "../components/ToDoList";
 import axios from "axios";
+import Calendar from "../components/Calendar";
 
 const Dashboard = () => {
   const { user } = useContext(LoginContext);
@@ -30,6 +31,7 @@ const Dashboard = () => {
   return (
     <>
       <Card>
+        <Calendar />
         <TodoList petID={petID} />
       </Card>
       <Cert />

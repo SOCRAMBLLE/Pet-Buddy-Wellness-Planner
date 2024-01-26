@@ -64,7 +64,7 @@ const TodoList = ({ petID }) => {
   
     try {
       const updatedTask = updatedTasks[index];
-      await axios.put("http://localhost:5000/api/pets/modifyTaskStatus", {
+      await axios.put("http://89.217.241.28:5000/api/pets/modifyTaskStatus", {
         petID: petID,
         taskID: updatedTask.taskID,
         newStatus: updatedTask.completed,
@@ -86,7 +86,7 @@ const TodoList = ({ petID }) => {
         console.error("Task not found in state.");
         return;
       } else {
-        await axios.delete("http://localhost/:5000/api/pets/deleteTask", {
+        await axios.delete("http://89.217.241.28/:5000/api/pets/deleteTask", {
           data: {
             petID: petID,
             taskID: tasks[index].taskID,
@@ -118,7 +118,7 @@ const TodoList = ({ petID }) => {
   const saveTask = async (index) => {
     try {
       const updatedTask = tasks[index];
-      await axios.put("http://localhost:5000/api/pets/modifyTask", {
+      await axios.put("http://89.217.241.28:5000/api/pets/modifyTask", {
         petID: petID,
         taskID: updatedTask.taskID,
         newDescription: updatedTask.editText,
@@ -155,7 +155,7 @@ const TodoList = ({ petID }) => {
     try {
       // Try to make POST
       const response = await axios.post(
-        "http://localhost:5000/api/pets/addTask",
+        "http://89.217.241.28:5000/api/pets/addTask",
         {
           petID: petID,
           newTask: newTask,
@@ -170,7 +170,7 @@ const TodoList = ({ petID }) => {
   
         // new fetch for updated tasks
         const updatedTasksResponse = await axios.get(
-          `http://localhost:5000/api/pets/list?petID=${petID}`
+          `http://89.217.241.28:5000/api/pets/list?petID=${petID}`
         );
   
         // update the updated tasks state
